@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "继续教育自动学习插件",
+  "version": "1.0",
+  "description": "继续教育自动学习插件可自动学习，无需手动操作。",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "inject.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.cdsjxjy.cn/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ]
+}
