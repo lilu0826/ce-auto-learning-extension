@@ -100,6 +100,7 @@ if (window.Vue) {
         el: div,
         data() {
             return {
+                title:"自动学习中...请保持窗口不关闭",
                 gridData: [],
                 dialogTableVisible: false,
                 style: {
@@ -119,7 +120,7 @@ if (window.Vue) {
         template: `
             <div :style="style" v-if="show">
                 <el-button type="primary" @click="dialogTableVisible = true">开始自动学习</el-button>
-                <el-dialog append-to-body @closed="handleClose" @opened="handleStart" title="自动学习中...请保持窗口不关闭" :visible.sync="dialogTableVisible">
+                <el-dialog append-to-body @closed="handleClose" @opened="handleStart" :title="title" :visible.sync="dialogTableVisible">
                     <el-table :data="gridData">
                         <el-table-column property="courseName" show-overflow-tooltip label="课程名"></el-table-column>
                         <el-table-column property="courseName" label="进度">
@@ -184,6 +185,7 @@ if (window.Vue) {
                         try {
                             await this.study();
                             console.log("学习完成");
+                            this.title = "学习完成,请关闭窗口。";
                             break;
                         } catch (error) {
                             if (error.message == "canceled") {
